@@ -1,5 +1,5 @@
 // Engine.cpp : Defines the functions for the static library.
-//
+// Authored by Crasong
 
 #include "pch.h"
 #include "framework.h"
