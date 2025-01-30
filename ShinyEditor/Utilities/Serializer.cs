@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace ShinyEditor.Utilities
 {
@@ -16,9 +17,12 @@ namespace ShinyEditor.Utilities
         {
             try
             {
-                using var fs = new FileStream(path, FileMode.Create);
                 var serializer = new DataContractSerializer(typeof(T));
-                serializer.WriteObject(fs, instance);
+                var settings = new XmlWriterSettings() { Indent = true };
+                using (var w = XmlWriter.Create(path, settings))
+                {
+                    serializer.WriteObject(w, instance);
+                }
             }
             catch (Exception ex)
             {
